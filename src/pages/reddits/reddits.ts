@@ -17,10 +17,13 @@ export class RedditsPage {
     }
 
     ngOnInit() {
-        this.getPosts(this.category,this.limit);
+        //console.log(this.category);
+        this.getAllPosts(this.category, this.limit);
+        //console.log(this.limit);
     }
 
     getDefaults(){
+
         if(localStorage.getItem('category') != null){
             this.category = localStorage.getItem('category');
         }else{
@@ -30,12 +33,14 @@ export class RedditsPage {
         if(localStorage.getItem('limit') != null){
             this.limit = localStorage.getItem('limit');
         }else{
-            this.limit = 10;
+            this.limit =2;
         }
     }
 
 
-    getPosts(category,limit){
+    getAllPosts(category,limit){
+        console.log('get post calling..');
+
         this.redditService.getPosts(category,limit)
             .subscribe(res => {
                 this.items = res.data.children;
@@ -49,7 +54,7 @@ export class RedditsPage {
     }
 
     changeCategory(){
-        this.getPosts(this.category,this.limit);
+        this.getAllPosts(this.category,this.limit);
 
     }
 
